@@ -1,0 +1,67 @@
+.App {
+  padding: 15px;
+  font-family: 'Kanit', sans-serif;
+}
+
+
+button {
+  background: #f1c40f;
+  border: none;
+  border-radius: .28571429rem;
+  padding: .78571429em 1.5em .78571429em;
+  font-weight: 700;
+  box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34,36,38,.15) inset;
+  font-size: 16px;
+  font-family: 'Kanit', sans-serif;
+  color: white;
+}
+
+.btn_queue {
+  width: 100%;
+}
+
+.btn_order {
+  width: 100%;
+  background-color: #32ff7e;
+  margin-top: 5px;
+}
+
+.list_menu {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.menu_item {
+  width: 48%;
+  margin: 1%;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+}
+
+.menuName {
+  flex: 1;
+}
+
+.checked {
+  width:50px;
+  height: 100%;
+  background: #7158e2;
+}
+
+.menu_action {
+  margin-top: 5px;
+}
+
+.menu_action button {
+  width: 100%;
+}
+
+.order_list {
+  margin-top: 15px;
+}
