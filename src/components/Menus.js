@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 function Menus(props) {
     return (
-        <div className="menu_item" style={{background: props.checked ? '#2ed573' : props.bgColor}}>
+        <div onClick={e => props.menuSelected(props)} className="menu_item" style={{background: props.menuItem.checked ? '#2ed573' : props.menuItem.bgColor}}>
             <div className="menuName">
-                {props.name}
+                {props.menuItem.name}
             </div>
         </div>
     )

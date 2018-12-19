@@ -1,6 +1,7 @@
 .App {
   padding: 15px;
   font-family: 'Kanit', sans-serif;
+  margin-bottom: 100px;
 }
 
 
@@ -22,7 +23,7 @@ button {
 
 .btn_order {
   width: 100%;
-  background-color: #32ff7e;
+  background-color:#00b894;
   margin-top: 5px;
 }
 
@@ -62,6 +63,59 @@ button {
   width: 100%;
 }
 
-.order_list {
+.order{
   margin-top: 15px;
+}
+
+.order_wrap {
+  margin-top: 15px;
+}
+
+.order_box {
+  margin-top: 10px;
+  padding: 15px;
+  box-shadow: 1px 1px 5px #888888;
+}
+
+.order_head{
+  display: flex;
+  margin-bottom: 10px;
+  border-bottom: 1px solid black;
+}
+
+.order_number {
+  flex: auto;
+}
+
+.order_item{
+  font-size: 13px;
+  flex: auto;
+}
+
+.order_title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.sweet_level {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sweet_level div {
+  width: 48%;
+  margin: 1%;
+  text-align: center;
+  background: #0984e3;
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.order_item_box {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 5px;
 }
