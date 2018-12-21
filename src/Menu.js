@@ -4,20 +4,10 @@ import OrderList from './components/Order/OrderList'
 import './App.css';
 import firebase from 'firebase';
 
-class App extends Component {
+class Menu extends Component {
 
   constructor(){
     super()
-    let config = {
-      apiKey: "AIzaSyBYexSgGHtA99cQimKqWiHeBXqCineu-68",
-      authDomain: "tofu-51c07.firebaseapp.com",
-      databaseURL: "https://tofu-51c07.firebaseio.com",
-      projectId: "tofu-51c07",
-      storageBucket: "tofu-51c07.appspot.com",
-      messagingSenderId: "165077986550"
-    }
-
-    firebase.initializeApp(config)
     this.state = {
       loading: true,
       menuName: [
@@ -54,6 +44,18 @@ class App extends Component {
         {
           id: 6,
           name: 'แมงลัก',
+          bgColor: '#ff7f50',
+          checked: false
+        },
+        {
+          id: 7,
+          name: 'วุ้นดำ',
+          bgColor: '#ff7f50',
+          checked: false
+        },
+        {
+          id: 8,
+          name: 'ทั้งหมด',
           bgColor: '#ff7f50',
           checked: false
         }
@@ -230,4 +232,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Menu;

@@ -95,12 +95,13 @@ button {
 .order_box {
   margin-top: 10px;
   padding: 15px;
-  box-shadow: 1px 1px 5px #888888;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
 }
 
 .order_head{
   display: flex;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   border-bottom: 1px solid black;
 }
 
@@ -134,10 +135,34 @@ button {
   padding-bottom: 10px;
 }
 
+.order_list_item {
+  border-bottom: 1px solid darkslategray;
+  padding: 10px 0 10px 0;
+}
+
 .order_item_box {
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin-bottom: 5px;
+}
+
+
+/* for order page */
+.kitchen_order {
+  font-size: 20px;
+}
+.kitchen_order .order_list_item,.kitchen_order .order_list_item span{
+  font-size: 18px !important;
+}
+
+.kitchen_order .sweet_level, .kitchen_order .tofu_type{
+  padding: 5px !important;
+  margin-right: 5px;
+}
+
+.kitchen_order .qty_item{
+  padding: 5px;
+  background: #079992;
+  color: white;
 }
 

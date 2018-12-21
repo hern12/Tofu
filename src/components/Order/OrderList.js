@@ -5,7 +5,6 @@ import OrderListItem from './OrderListItem'
 
 function OrderList(props){
 
-
     function renderCalculatePrice(order) {
         if(Object.keys(order.menuList).length > 1){
             // console.log(Object.keys(order.menuList))
@@ -14,8 +13,13 @@ function OrderList(props){
                 if(order.menuList[item]){
                     if(Array.isArray(order.menuList[item].ingredient)){
                         if(order.menuList[item].ingredient.length === 1 && order.menuList[item].tofuType){
-                            sumPrice += 10 * parseInt(item.qty)
-                            return sumPrice
+                            if(order.menuList[item].ingredient[0].name === 'ทั้งหมด'){
+                                sumPrice += 15 * parseInt(order.menuList[item].qty)
+                                return sumPrice
+                            }else{
+                                sumPrice += 10 * parseInt(item.qty)
+                                return sumPrice
+                            }
                         //ice soil milk and more than 1 ingredient plus 15 * qty
                         }else if(order.menuList[item].ingredient.length > 0 && !order.menuList[item].tofuType){
                             sumPrice += 15 * parseInt(order.menuList[item].qty)
@@ -58,13 +62,13 @@ function OrderList(props){
                                  {renderCalculatePrice(item)}
                             </div>
                         </div>
-                        <div className="order_list_item">
+                        <div className="order_list_item_box">
                             {
                                 Object.keys(item.menuList).length > 1 ?
                                 Object.keys(item.menuList).map((subItem, index) => {
                                     if(subItem !== 'id'){
                                         return (
-                                        <div  key={index} style={{display: 'flex', fontSize: 13}}>
+                                        <div className="order_list_item"  key={index} style={{display: 'flex', fontSize: 13}}>
                                             {index + 1}. <OrderListItem 
                                                         orderListItem={item.menuList[subItem].ingredient} 
                                                         tofuType={item.menuList[subItem].tofuType} 

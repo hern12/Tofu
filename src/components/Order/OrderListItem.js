@@ -17,14 +17,17 @@ function OrderListItem(props){
                     </div>
                 }
             </div>
-            <strong style={{textAlign: 'center', color: 'white', background: '#2d3436', marginLeft: '5px'}}>
+            <strong 
+            className="sweet_level" 
+            style={{textAlign: 'center', color: 'white', background: '#2d3436', marginLeft: '5px'}}>
                 {props.sweetLevel.name}
             </strong>
-            <strong 
+            <strong
+            className="tofu_type" 
             style={{background: props.tofuType === true ? '#ff7675' : '#0984e3', padding: 2, color: 'white'}}>
                 {props.tofuType ? 'ร้อน' : 'เย็น'}
             </strong>
-            <strong>
+            <strong className="qty_item">
                 X {props.qty}
             </strong>
         </div>
