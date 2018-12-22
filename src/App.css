@@ -90,13 +90,57 @@ button {
 
 .order_wrap {
   margin-top: 15px;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .order_box {
-  margin-top: 10px;
+  margin-top: 20px;
   padding: 15px;
   box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
+
+	animation-name: swingY;
+	animation-timing-function:cubic-bezier(.36,-0.64,.34,1.76);
+	animation-duration: 0.5s;
+}
+
+.order_item_box {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+}
+
+.order_list_item {
+  border-bottom: 1px solid darkslategray;
+  padding: 10px 0 10px 0;
+
+  animation-name: swingX;
+	animation-timing-function:cubic-bezier(.36,-0.64,.34,1.76);
+	animation-duration: 0.5s;
+}
+
+@keyframes swingX {
+	0% {
+    opacity: 0;
+    transform: rotateY(-90deg);
+	}
+	100% {
+    opacity: 1;
+    transform: none;
+	}
+}
+
+@keyframes swingY {
+	0% {
+    opacity: 0;
+    transform: rotateY(-90deg);
+	}
+	100% {
+    opacity: 1;
+    transform: none;
+	}
 }
 
 .order_head{
@@ -133,17 +177,6 @@ button {
   color: white;
   padding-top: 10px;
   padding-bottom: 10px;
-}
-
-.order_list_item {
-  border-bottom: 1px solid darkslategray;
-  padding: 10px 0 10px 0;
-}
-
-.order_item_box {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
 }
 
 

@@ -164,9 +164,7 @@ class App extends Component {
 
 
   onAddQueue() {
-
     let db = firebase.database().ref('/orders')
-
     const newQueue = {
       id: ''
     }
