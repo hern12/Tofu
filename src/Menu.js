@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import Menus from './components/Menus'
-import OrderList from './components/Order/OrderList'
+import OrderDetail from './components/Order/OrderDetail'
 import './App.css';
 import firebase from 'firebase';
+
 
 class Menu extends Component {
 
   constructor(){
     super()
     this.state = {
+      open: false,
       loading: true,
       menuName: [
         {
@@ -83,8 +85,9 @@ class Menu extends Component {
         name: 'ไม่ใส่'
       },
       queue: [],
-      currentQueue: -1,
-      qty: 1,
+      currentQueue: null,
+      qty: '',
+      editMenu: {},
       tofuType: true
     }
 
@@ -93,13 +96,23 @@ class Menu extends Component {
     this.submitMenu = this.submitMenu.bind(this)
     this.handleSweetLevel = this.handleSweetLevel.bind(this)
     this.handleQty = this.handleQty.bind(this)
+    this.handleEdit = this.handleEdit.bind(this)
+    this.onCloseModal = this.onCloseModal.bind(this)
+    this.handleRemove = this.handleRemove.bind(this)
   }
 
   componentDidMount(){
     let db = firebase.database().ref('orders')
-    let queue = []
     db.on('value', snapshot => {
-      if(snapshot.val()){
+      let queue = []
+      if(snapshot.val() === null){
+        queue = []
+        this.setState({
+          queue: queue,
+          loading: false
+        })
+      }
+      else if(snapshot.val()){
         queue = Object.keys(snapshot.val()).map(item => {
           return {
             id: item,
@@ -108,14 +121,14 @@ class Menu extends Component {
         })
         this.setState({
           queue: queue,
-          currentQueue: queue[queue.length - 1].id,
           loading: false
         })
       }
     })
-    
+
   }
 
+  
   handleQty(e){
     this.setState({
       qty: e.target.value
@@ -141,16 +154,40 @@ class Menu extends Component {
     })
   }
 
+  //call from OrderDetail
+  handleRemove(item, index){
+    firebase.database().ref('/orders/'+item.id).remove()
+  }
+
+  //call from OrderDetail
+  handleEdit(item, index) {
+    let editMenu = Object.assign({}, this.state.editMenu)
+    editMenu['menuList'] = item
+    editMenu['orderNumber'] = index
+    this.setState({
+      open: true,
+      editMenu: editMenu,
+      currentQueue: item.id
+    })
+  }
+
+  //close modal
+  onCloseModal() {
+    this.setState({
+      open: false
+    })
+  }
+
   submitMenu() {
     const {queue, currentQueue, menuName, selectedSweetLevel, tofuType, qty} = this.state
-    if(queue.length > 0){
+    if(queue.length > 0 && currentQueue){
       //get selected order
       let menuOrder = menuName.filter(item => item.checked)
       let data = {
         ingredient: menuOrder.length > 0 ? menuOrder :  {name: 'น้ำเต้าหู้เปล่า'},
         tofuType: tofuType,
         sweetLevel: selectedSweetLevel,
-        qty: qty < 0 ? 1 : qty
+        qty: (qty < 0) || (!qty) ? 1 : qty
       }
 
       firebase.database().ref('orders/' + currentQueue).push(data)
@@ -166,7 +203,6 @@ class Menu extends Component {
 
 
   onAddQueue() {
-
     let db = firebase.database().ref('/orders')
 
     const newQueue = {
@@ -186,8 +222,7 @@ class Menu extends Component {
   }
 
   render() {
-    const {menuName, queue, tofuType, sweetLevel, qty, loading} = this.state
-    
+    const {menuName, queue, tofuType, sweetLevel, qty, loading, open, editMenu} = this.state
     return (
       <div className="App">
         <div className="add_q">
@@ -203,7 +238,7 @@ class Menu extends Component {
             {sweetLevel.map((item, index) => {
               return (
                 <div 
-                style={{background: item.id === this.state.selectedSweetLevel.id ? '#d63031' : null}}
+                style={{background: item.id === this.state.selectedSweetLevel.id ? 'rgb(46, 213, 115)' : null}}
                 key={item.id} 
                 onClick={e => this.handleSweetLevel(item)}>
                   {item.name}
@@ -212,7 +247,7 @@ class Menu extends Component {
             })}
           </div>
           <div className="menu_action"> 
-            <button onClick={e => this.setState({tofuType: !tofuType})} style={{background: tofuType ? '#ff6b81' : '#74b9ff'}}>
+            <button onClick={e => this.setState({tofuType: !tofuType})} style={{background: tofuType ? 'rgb(46, 213, 115)' : 'rgb(46, 213, 115)'}}>
               {tofuType ? 'ร้อน' : 'เย็น'}
             </button>
             <input value={qty} type="number" className="qty" onChange={e => this.handleQty(e)} placeholder="ใส่จำนวน"/>
@@ -224,7 +259,14 @@ class Menu extends Component {
         <div className="order"> 
           <div className="order_title">รายการสั่ง</div>
           {
-            loading ? <div style={{textAlign: 'center'}}>Loading...</div> :  <OrderList listQueue={queue} />
+            loading ? 
+            <div style={{textAlign: 'center'}}>Loading...</div> 
+            :  
+            <OrderDetail 
+            handleRemove={this.handleRemove}
+            editItem={editMenu} 
+            handleEdit={this.handleEdit} 
+            listQueue={queue} />
           }
         </div>
       </div>

@@ -24,6 +24,8 @@ input {
   width: 100%;
   text-align: right;
   font-size: 20px;
+  max-width: -webkit-fill-available;
+  padding-right: 20px;
 }
 
 button {
@@ -124,7 +126,7 @@ button {
 @keyframes swingX {
 	0% {
     opacity: 0;
-    transform: rotateY(-90deg);
+    transform: rotateX(-90deg);
 	}
 	100% {
     opacity: 1;
@@ -199,3 +201,20 @@ button {
   color: white;
 }
 
+.edit_order, .delete_order{
+  padding : 5px;
+  margin-right: 5px;
+  color: white;
+}
+.edit_order{
+  background: #e67e22; 
+}
+
+.delete_order{
+  background: #e74c3c;
+}
+
+
+.modal_detail{
+  width: 300px;
+}

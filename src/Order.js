@@ -6,7 +6,6 @@ class Order extends Component {
 
     constructor(props) {
         super(props)
-        console.log(firebase)
         this.state = {
             queue: [],
             loading: true,
@@ -15,20 +14,27 @@ class Order extends Component {
 
     componentDidMount() {
         let db = firebase.database().ref('orders')
-        let queue = []
         db.on('value', snapshot => {
-        if(snapshot.val()){
-            queue = Object.keys(snapshot.val()).map(item => {
-            return {
-                id: item,
-                menuList: snapshot.val()[item]
+            let queue = []
+            if(snapshot.val() === null){
+                queue = []
+                this.setState({
+                    queue: queue,
+                    loading: false
+                })
             }
-            })
-            this.setState({
-                queue: queue,
-                loading: false
-            })
-        }
+            else if(snapshot.val()){
+                queue = Object.keys(snapshot.val()).map(item => {
+                return {
+                    id: item,
+                    menuList: snapshot.val()[item]
+                }
+                })
+                this.setState({
+                    queue: queue,
+                    loading: false
+                })
+            }
         })
     }
 
