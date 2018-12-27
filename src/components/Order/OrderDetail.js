@@ -29,14 +29,15 @@ function OrderDetail(props) {
                                     Object.keys(props.listQueue[props.editItem.orderNumber].menuList).map((subItem, subIndexindex) => {
                                         if(subItem !== 'id'){
                                             if(index === props.editItem.orderNumber){
-                                            return (
-                                                    <div className="order_list_item"  key={subIndexindex} style={{display: 'flex', fontSize: 13}}>
-                                                        {subIndexindex + 1}. <OrderListItem 
-                                                                    orderListItem={props.listQueue[props.editItem.orderNumber].menuList[subItem].ingredient} 
-                                                                    tofuType={props.listQueue[props.editItem.orderNumber].menuList[subItem].tofuType} 
-                                                                    sweetLevel={props.listQueue[props.editItem.orderNumber].menuList[subItem].sweetLevel}
-                                                                    qty={props.listQueue[props.editItem.orderNumber].menuList[subItem].qty}/>
-                                                    </div>
+                                                return (
+                                                        <div className="order_list_item"  key={subIndexindex} style={{display: 'flex', fontSize: 13}}>
+                                                            {subIndexindex + 1}. <OrderListItem 
+                                                                        orderListId={subItem}
+                                                                        orderListItem={props.listQueue[props.editItem.orderNumber].menuList[subItem].ingredient} 
+                                                                        tofuType={props.listQueue[props.editItem.orderNumber].menuList[subItem].tofuType} 
+                                                                        sweetLevel={props.listQueue[props.editItem.orderNumber].menuList[subItem].sweetLevel}
+                                                                        qty={props.listQueue[props.editItem.orderNumber].menuList[subItem].qty}/>
+                                                        </div>
                                                 )
                                             }
                                         }

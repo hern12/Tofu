@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
+import { removeSubItem } from "../../actions";
+import { connect } from 'react-redux'
 
 function OrderListItem(props){
+    console.log(props)
     return (
         <div className="order_item_box">
             <div className="order_item">
@@ -30,8 +33,27 @@ function OrderListItem(props){
             <strong className="qty_item">
                 X {props.qty}
             </strong>
+            <strong className="remove_item" onClick={e => props.removeSubItem(props.orderListId)}>
+                - 
+            </strong>
         </div>
     )
 }
 
-export default OrderListItem
+
+const mapStateToProps = (state) => {
+    return {
+        subItem: state,
+    }
+  }
+  
+  
+const mapDispatchToProps = dispatch => {
+    return {
+        removeSubItem: (item) => {
+            return dispatch(removeSubItem(item))
+        },
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderListItem)

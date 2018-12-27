@@ -1,11 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import { Provider } from 'react-redux'
 import * as serviceWorker from './serviceWorker';
 import AppRouter from './router'
 import { BrowserRouter } from 'react-router-dom';
 import firebase from 'firebase';
+import { applyMiddleware, compose, createStore } from 'redux'
+import { createBrowserHistory } from 'history'
+import { routerMiddleware } from 'connected-react-router'
+import rootReducer from './reducers'
+
+const history = createBrowserHistory()
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const store = createStore(
+  rootReducer(history),
+  composeEnhancer(
+    applyMiddleware(
+      routerMiddleware(history),
+    ),
+  ),
+)
 
 let config = {
     apiKey: "AIzaSyBYexSgGHtA99cQimKqWiHeBXqCineu-68",
@@ -19,9 +34,11 @@ let config = {
 firebase.initializeApp(config)
 
 ReactDOM.render(
-<BrowserRouter>
-    <AppRouter />
-</BrowserRouter>
+    <Provider store={store}>
+        <BrowserRouter>
+            <AppRouter history={history} />
+        </BrowserRouter>
+    </Provider>
 , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

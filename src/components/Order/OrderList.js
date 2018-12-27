@@ -19,6 +19,7 @@ function OrderList(props){
                             {
                                 Object.keys(item.menuList).length > 1 ?
                                 Object.keys(item.menuList).map((subItem, index) => {
+                                    console.log(subItem)
                                     if(subItem !== 'id'){
                                         return (
                                         <div className="order_list_item"  key={index} style={{display: 'flex', fontSize: 13}}>
@@ -26,7 +27,8 @@ function OrderList(props){
                                                         orderListItem={item.menuList[subItem].ingredient} 
                                                         tofuType={item.menuList[subItem].tofuType} 
                                                         sweetLevel={item.menuList[subItem].sweetLevel}
-                                                        qty={item.menuList[subItem].qty}/>
+                                                        qty={item.menuList[subItem].qty}
+                                                        />
                                         </div>
                                         )
                                     }

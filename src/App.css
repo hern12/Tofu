@@ -218,3 +218,11 @@ button {
 .modal_detail{
   width: 300px;
 }
+/* end order page */
+
+.remove_item {
+  padding: 5px 10px 5px 10px;
+  color: white;
+  background: #e74c3c;
+  margin-left: 10px;
+}

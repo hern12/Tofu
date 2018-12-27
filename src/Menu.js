@@ -7,8 +7,8 @@ import firebase from 'firebase';
 
 class Menu extends Component {
 
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       open: false,
       loading: true,

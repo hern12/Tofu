@@ -5,13 +5,14 @@ import Menu from './Menu'
 import Order from './Order'
 
 
-const AppRouter = (props) => (
-    <Router>
-        <div>
-            <Route path="/" exact component={Menu} />
-            <Route path="/order" exact component={Order} />
-        </div>
-    </Router>
-)
-
+const AppRouter = (props) => {
+    return (
+        <Router>
+            <div>
+                <Route path="/" exact component={Menu} />
+                <Route path="/order" exact component={Order} />
+            </div>
+        </Router>
+    )    
+}
 export default AppRouter
